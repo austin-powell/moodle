@@ -4099,16 +4099,37 @@ function course_check_updates($course, $tocheck, $filter = array()) {
  * @return string (one of COURSE_TIMELINE_FUTURE, COURSE_TIMELINE_INPROGRESS or COURSE_TIMELINE_PAST)
  */
 function course_classify_for_timeline($course, $user = null, $completioninfo = null) {
-    global $USER;
+    global $USER, $CFG;
 
     if ($user == null) {
         $user = $USER;
     }
-
+    $method = $CFG->navclassifymycourses; // method for classifying courses
     $today = time();
-    // End date past.
-    if (!empty($course->enddate) && $course->enddate < $today) {
-        return COURSE_TIMELINE_PAST;
+    
+
+    if($method == 'coursedates'){ // Using course start and end dates
+        // End date past.
+        if (!empty($course->enddate) && $course->enddate < $today) {
+            return COURSE_TIMELINE_PAST;
+        }
+          // Start date not reached.
+        if (!empty($course->startdate) && $course->startdate > $today) {
+            return COURSE_TIMELINE_FUTURE;
+        }
+    }
+    
+    if($method == 'enroldates'){ // Using user enrolment dates
+        $times = enrol_get_user_enrolment_times($user, $course->id);
+        
+        // End date past.
+        if (!empty($times->timeend) && $times->timeend < $today) {
+            return COURSE_TIMELINE_PAST;
+        }
+          // Start date not reached.
+        if (!empty($times->timestart) && $times->timestart > $today) {
+            return COURSE_TIMELINE_FUTURE;
+        }
     }
 
     if ($completioninfo == null) {
@@ -4118,11 +4139,6 @@ function course_classify_for_timeline($course, $user = null, $completioninfo = n
     // Course was completed.
     if ($completioninfo->is_enabled() && $completioninfo->is_course_complete($user->id)) {
         return COURSE_TIMELINE_PAST;
-    }
-
-    // Start date not reached.
-    if (!empty($course->startdate) && $course->startdate > $today) {
-        return COURSE_TIMELINE_FUTURE;
     }
 
     // Everything else is in progress.

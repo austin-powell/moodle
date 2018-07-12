@@ -969,7 +969,33 @@ function enrol_get_all_users_courses($userid, $onlyactive = false, $fields = NUL
     return $courses;
 }
 
+/**
+ * Returns timestart and timeend values for user's enrolment in specified course
+ *
+ * @param object $user 
+ * @param int $courseid
+ * @return object
+ */
+function enrol_get_user_enrolment_times($user = NULL, $courseid) {
+    global $DB, $USER;
 
+    if($user === null) {
+        $user = $USER;
+    }
+    
+    if(!$courseid){
+        throw new coding_exception('Missing required courseid parameter in enrol_get_user_enrolment_times()');
+    }
+    
+    $sql = "SELECT enrol.courseid, ue.userid, ue.timestart, ue.timeend
+              FROM {user_enrolments} ue
+              JOIN {enrol} enrol ON enrol.id = ue.enrolid
+             WHERE ue.userid = ?
+                   AND enrol.courseid = ?";
+    $params = array($user->id, $courseid);
+    
+    return $DB->get_record_sql($sql, $params);    
+}
 
 /**
  * Called when user is about to be deleted.

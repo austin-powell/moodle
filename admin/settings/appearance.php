@@ -179,6 +179,11 @@ preferences,moodle|/user/preferences.php|preferences',
         'idnumber' => new lang_string('sort_idnumber', 'admin'),
     );
     $temp->add(new admin_setting_configselect('navsortmycoursessort', new lang_string('navsortmycoursessort', 'admin'), new lang_string('navsortmycoursessort_help', 'admin'), 'sortorder', $sortoptions));
+    $classifyoptions = array(
+        'coursedates' => new lang_string('classify_coursedates', 'admin'),
+        'enroldates' => new lang_string('classify_enroldates', 'admin'),
+    );
+    $temp->add(new admin_setting_configselect('navclassifymycourses', new lang_string('navclassifymycourses', 'admin'), new lang_string('navclassifymycourses_desc', 'admin'), 'coursedates', $classifyoptions));
     $temp->add(new admin_setting_configtext('navcourselimit', new lang_string('navcourselimit', 'admin'),
         new lang_string('confignavcourselimit', 'admin'), 10, PARAM_INT));
     $temp->add(new admin_setting_configcheckbox('usesitenameforsitepages', new lang_string('usesitenameforsitepages', 'admin'), new lang_string('configusesitenameforsitepages', 'admin'), 0));
