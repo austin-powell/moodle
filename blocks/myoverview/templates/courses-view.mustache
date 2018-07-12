@@ -29,12 +29,28 @@
             <a class="btn btn-default active" href="#myoverview_courses_view_in_progress" data-toggle="tab">
                 {{#str}} inprogress, block_myoverview {{/str}}
             </a>
+            {{#hidetabs}}
+                {{#future}}
+                <a class="btn btn-default" href="#myoverview_courses_view_future" data-toggle="tab">
+                    {{#str}} future, block_myoverview {{/str}}
+                </a>
+                {{/future}}
+                {{#past}}
+                <a class="btn btn-default" href="#myoverview_courses_view_past" data-toggle="tab">
+                    {{#str}} past, block_myoverview {{/str}}
+                </a>
+                {{/past}}
+            {{/hidetabs}}
+            
+            {{^hidetabs}}
             <a class="btn btn-default" href="#myoverview_courses_view_future" data-toggle="tab">
                 {{#str}} future, block_myoverview {{/str}}
             </a>
             <a class="btn btn-default" href="#myoverview_courses_view_past" data-toggle="tab">
                 {{#str}} past, block_myoverview {{/str}}
             </a>
+            {{/hidetabs}}
+
         </div>
     </div>
     <div class="tab-content">

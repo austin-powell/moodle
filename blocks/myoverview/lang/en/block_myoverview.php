@@ -25,6 +25,8 @@
 $string['defaulttab'] = 'Default tab';
 $string['defaulttab_desc'] = 'The tab that will be displayed when a user first views their course overview. When returning to their course overview, the user\'s active tab is remembered.';
 $string['future'] = 'Future';
+$string['hideemptytabs'] = 'Hide Future and Past Tabs';
+$string['hideemptytabs_desc'] = 'If enabled, the Future and Past tabs will only display if the user has courses classified in those screens.';
 $string['inprogress'] = 'In progress';
 $string['morecourses'] = 'More courses';
 $string['myoverview:addinstance'] = 'Add a new course overview block';

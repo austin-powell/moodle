@@ -36,4 +36,8 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configselect('block_myoverview/defaulttab',
         get_string('defaulttab', 'block_myoverview'),
         get_string('defaulttab_desc', 'block_myoverview'), 'timeline', $options));
+    
+    $settings->add(new admin_setting_configcheckbox('block_myoverview/hidetabs', 
+        get_string('hideemptytabs', 'block_myoverview'), 
+        get_string('hideemptytabs_desc', 'block_myoverview'), 0));
 }
