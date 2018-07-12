@@ -31,7 +31,10 @@
         <div class="card-block course-info-container" id="course-info-container-{{id}}">
             <div class="hidden-sm-up hidden-phone">
                 {{> block_myoverview/progress-chart}}
-                <h4 class="h5"><a href="{{viewurl}}" class="{{^visible}}dimmed{{/visible}}">{{{fullnamedisplay}}}</a></h4>
+                <h4 class="h5">
+                    {{#accessible}}<a href="{{viewurl}}" class="{{^visible}}dimmed{{/visible}}">{{{fullnamedisplay}}}</a>{{/accessible}}
+                    {{^accessible}}<p>{{{fullnamedisplay}}}</p>{{/accessible}}
+                </h4>
             </div>
             <div class="hidden-xs-down visible-phone">
                 <div class="media">
@@ -41,7 +44,10 @@
                         </div>
                     </div>
                     <div class="media-body">
-                        <h4 class="h5"><a href="{{viewurl}}" class="{{^visible}}dimmed{{/visible}}">{{{fullnamedisplay}}}</a></h4>
+                        <h4 class="h5">
+                            {{#accessible}}<a href="{{viewurl}}" class="{{^visible}}dimmed{{/visible}}">{{{fullnamedisplay}}}</a>{{/accessible}}
+                            {{^accessible}}<p>{{{fullnamedisplay}}}</p>{{/accessible}}
+                        </h4>
                     </div>
                 </div>
             </div>

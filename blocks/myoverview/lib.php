@@ -35,6 +35,16 @@ define('BLOCK_MYOVERVIEW_TIMELINE_VIEW', 'timeline');
 define('BLOCK_MYOVERVIEW_COURSES_VIEW', 'courses');
 
 /**
+ * Display active courses
+ */
+define('BLOCK_MYOVERVIEW_ACTIVE_COURSES', 'currentcourses');
+
+/**
+ * Display all courses ever
+ */
+define('BLOCK_MYOVERVIEW_EVER_COURSES', 'evercourses');
+
+/**
  * Returns the name of the user preferences as well as the details this plugin uses.
  *
  * @return array

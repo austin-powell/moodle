@@ -36,4 +36,14 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configselect('block_myoverview/defaulttab',
         get_string('defaulttab', 'block_myoverview'),
         get_string('defaulttab_desc', 'block_myoverview'), 'timeline', $options));
+    
+    $courseoptions = [
+        BLOCK_MYOVERVIEW_ACTIVE_COURSES => get_string('currentcourses', 'block_myoverview'),
+        BLOCK_MYOVERVIEW_EVER_COURSES => get_string('evercourses', 'block_myoverview')
+    ];
+
+    $settings->add(new admin_setting_configselect('block_myoverview/displayedcourses',
+        get_string('displayedcourses', 'block_myoverview'),
+        get_string('displayedcourses_desc', 'block_myoverview'), 'currentcourses', $courseoptions));
+    
 }

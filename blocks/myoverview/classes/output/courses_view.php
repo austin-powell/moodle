@@ -86,6 +86,13 @@ class courses_view implements renderable, templatable {
             // Include course visibility.
             $exportedcourse->visible = (bool)$course->visible;
 
+            // If displaying all courses user has ever been enrolled in
+            // Check if they are enrolled in this course
+            if($config->displayedcourses == 'evercourses'){
+                $exportedcourse->accessible = is_enrolled($context, null, '', true);
+            } else {
+                $exportedcourse->accessible = true;
+            }            
             $courseprogress = null;
 
             $classified = course_classify_for_timeline($course);
@@ -145,7 +152,10 @@ class courses_view implements renderable, templatable {
                 }
             }
         }
-
+        // Sort past courses so that currently accessible ones appear at top
+        usort($coursesview['past']['pages'][$pastpages]['courses'], function($a, $b) {
+            return $b->accessible <=> $a->accessible;
+        });
         return $coursesview;
     }
 }

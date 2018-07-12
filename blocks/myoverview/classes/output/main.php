@@ -69,7 +69,17 @@ class main implements renderable, templatable {
             $sort = 'visible DESC, '.$CFG->navsortmycoursessort.' ASC';
         }
 
-        $courses = enrol_get_my_courses('*', $sort);
+        // Get block config
+        $config = get_config('block_myoverview');
+        $todisplay = $config->displayedcourses;
+
+        // Get courses to display
+        if($todisplay == 'evercourses'){
+            $courses = enrol_get_users_courses($USER->id, null, '*', $sort);
+        } else {
+            $courses = enrol_get_my_courses('*', $sort);
+        }
+        
         $coursesprogress = [];
 
         foreach ($courses as $course) {
